@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap SelectInput</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="../src/css/selectinput.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-6">
+                    <div class="well" style="margin: 2rem 0;">
+                        <div class="form-group">
+                            <label class="control-label" for="selectinput1">Select:</label>
+                            <select id="selectinput1" class="form-control">
+                                <option value="111">Select option one</option>
+                                <option value="222" selected>Select option two</option>
+                                <option value="333">Select option three</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Select:</label>
+                            <select class="form-control select-input">
+                                <option>Other select one</option>
+                                <option disabled>Other select two</option>
+                                <option>Other select three</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="selectinput2">Multiple select:</label>
+                            <select id="selectinput2" multiple class="form-control">
+                                <option value="111">Select option one</option>
+                                <option value="222" selected>Select option two</option>
+                                <option value="333">Select option three</option>
+                                <option value="111" disabled>Select option one</option>
+                                <option value="222" selected>Select option two</option>
+                                <option value="333">Select option three</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Select with search:</label>
+                            <select class="form-control select-input">
+                                <option>Other select one</option>
+                                <option>Other select two</option>
+                                <option>Other select three</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">&nbsp;</div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../src/js/selectinput.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.select-input').selectinput();
+                $('#selectinput1').selectinput();
+                $('#selectinput2').selectinput();
+            });
+        </script>
+    </body>
+</html>
