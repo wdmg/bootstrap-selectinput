@@ -2,7 +2,7 @@
  * Select to dropdown list for Bootstrap 3
  *
  * @category        jQuery Plugin
- * @version         1.0.0
+ * @version         1.0.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/bootstrap-selectinput
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
