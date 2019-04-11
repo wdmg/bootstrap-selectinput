@@ -1,3 +1,15 @@
-.select-input {
+.dropdown {
+  &.open {
 
+  }
+  .dropdown-toggle {
+    & > span {
+
+    }
+  }
+  .dropdown-menu {
+    & > .dropdown-item {
+
+    }
+  }
 }

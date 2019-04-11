@@ -21,37 +21,24 @@
                     <div class="well" style="margin: 2rem 0;">
                         <div class="form-group">
                             <label class="control-label" for="selectinput1">Select:</label>
-                            <select id="selectinput1" class="form-control" data-toggle-text="TEST!" data-toggle-change="false">
-                                <option value="111">Select option one</option>
-                                <option value="222" selected>Select option two</option>
-                                <option value="333">Select option three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Select:</label>
-                            <select class="form-control select-input">
-                                <option>Other select one</option>
-                                <option disabled>Other select two</option>
-                                <option>Other select three</option>
+                            <select id="selectinput1" class="form-control">
+                                <option value="1">Select option one</option>
+                                <option value="2" selected>Select option two</option>
+                                <option value="3">Select option three</option>
+                                <option value="4" disabled>Select option one</option>
+                                <option value="5" selected>Select option two</option>
+                                <option value="6">Select option three</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="selectinput2">Multiple select:</label>
                             <select id="selectinput2" multiple class="form-control">
-                                <option value="111">Select option one</option>
-                                <option value="222" selected>Select option two</option>
-                                <option value="333">Select option three</option>
-                                <option value="111" disabled>Select option one</option>
-                                <option value="222" selected>Select option two</option>
-                                <option value="333">Select option three</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Select with search:</label>
-                            <select class="form-control select-input">
-                                <option>Other select one</option>
-                                <option>Other select two</option>
-                                <option>Other select three</option>
+                                <option value="1">Select option one</option>
+                                <option value="2" selected>Select option two</option>
+                                <option value="3">Select option three</option>
+                                <option value="4" disabled>Select option one</option>
+                                <option value="5" selected>Select option two</option>
+                                <option value="6">Select option three</option>
                             </select>
                         </div>
                     </div>
@@ -64,9 +51,12 @@
         <script src="../src/js/selectinput.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('.select-input').selectinput();
-                $('#selectinput1').selectinput();
-                $('#selectinput2').selectinput();
+                $('select').selectinput({
+                    dropdownClass: '.dropdown .some-dropdown',
+                    toggleText: 'Select option',
+                    toggleCaret: '<span class="caret"></span>'
+
+                });
             });
         </script>
     </body>

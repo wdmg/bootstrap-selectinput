@@ -49,6 +49,11 @@
             toggleText: 'Dropdown', // data-toggle-text
             toggleCaret: '<span class="caret"></span>', // data-toggle-caret
             toggleChange: true, // data-toggle-change
+            onChange: function onChange() { }, // The function that is called when select option change
+            onShow: function onShow() { }, // The function that is called when dropdown is ready to be displayed
+            onShown: function onShown() { }, // The function that is called when dropdown is displayed
+            onHide: function onHide() { }, // The function that is called when dropdown to prepare for hiding
+            onHidden: function onHidden() { }, // The function that is called when dropdown is hidden
             debug: false
         };
 
@@ -65,12 +70,13 @@
                 config.listClass = config.listClass.replace(/\./g, '');
                 config.itemClass = config.itemClass.replace(/\./g, '');
 
-                console.log($element.data());
-
                 // Merge default and custom options
                 _this._config = $.extend({}, defaults, $element.data(), config);
 
                 _this._$element = $element instanceof jQuery ? $element : $($element);
+
+                if(_this._config.debug)
+                    console.log('Select data attr: ', $element.data());
 
                 _this._selectId = 'selectinput-' + (String.fromCharCode(Math.floor(Math.random() * 11)) + Math.floor(Math.random() * 1000000)).trim();
 
@@ -122,6 +128,33 @@
                         if(!$select.next().is('.dropdown')) {
                             $select.after($dropdown);
                         }
+
+                        // Call a public methods
+                        $dropdown.on('show.bs.dropdown', function(event) {
+
+                            if(_this._config.debug)
+                                console.log('Call `onShow` method', _this);
+
+                            return _this._config.onShow.call(_this);
+                        }).on('shown.bs.dropdown', function(event) {
+
+                            if(_this._config.debug)
+                                console.log('Call `onShown` method', _this);
+
+                            return _this._config.onShown.call(_this);
+                        }).on('hide.bs.dropdown', function(event) {
+
+                            if(_this._config.debug)
+                                console.log('Call `onHide` method', _this);
+
+                            return _this._config.onHide.call(_this);
+                        }).on('hidden.bs.dropdown', function(event) {
+
+                            if(_this._config.debug)
+                                console.log('Call `onHidden` method', _this);
+
+                            return _this._config.onHidden.call(_this);
+                        });
 
                         $options.find('li').on('click', function(event) {
                             event.preventDefault();
@@ -186,10 +219,20 @@
                                 $button.html(label + ' ' + _this._config.toggleCaret);
                             }
 
+                            if (!_target.hasClass('disabled')) {
+
+                                if(_this._config.debug)
+                                    console.log('Call `onChange` method', _this);
+
+                                return _this._config.onChange.call(_this);
+                            }
+
                         });
+
                     } else {
                         console.warn('Element has not select!', $select);
                     }
+
                 });
             }
 
