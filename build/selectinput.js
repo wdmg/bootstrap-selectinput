@@ -42,11 +42,13 @@
 
         // Public options and methods
         var defaults = {
-            dropdownClass: '.dropdown',
-            toggleButtonClass: '.btn .btn-default .dropdown-toggle',
-            dropdownMenuClass: '.dropdown-menu',
-            dropdownItemClass: '.dropdown-item',
-            toggleButtonCaret: '<span class="caret"></span>',
+            dropdownClass: '.dropdown', // data-dropdown-class
+            listClass: '.dropdown-menu', // data-list-class
+            itemClass: '.dropdown-item', // data-item-class
+            toggleClass: '.btn .btn-default .dropdown-toggle', // data-toggle-class
+            toggleText: 'Dropdown', // data-toggle-text
+            toggleCaret: '<span class="caret"></span>', // data-toggle-caret
+            toggleChange: true, // data-toggle-change
             debug: false
         };
 
@@ -59,12 +61,14 @@
 
                 // Prepare class name to remove dots (.) from selector
                 config.dropdownClass = config.dropdownClass.replace(/\./g, '');
-                config.toggleButtonClass = config.toggleButtonClass.replace(/\./g, '');
-                config.dropdownMenuClass = config.dropdownMenuClass.replace(/\./g, '');
-                config.dropdownItemClass = config.dropdownItemClass.replace(/\./g, '');
+                config.toggleClass = config.toggleClass.replace(/\./g, '');
+                config.listClass = config.listClass.replace(/\./g, '');
+                config.itemClass = config.itemClass.replace(/\./g, '');
+
+                console.log($element.data());
 
                 // Merge default and custom options
-                _this._config = $.extend({}, defaults, config);
+                _this._config = $.extend({}, defaults, $element.data(), config);
 
                 _this._$element = $element instanceof jQuery ? $element : $($element);
 
@@ -79,7 +83,6 @@
                         $select.css('display', 'none').removeAttr('class');
                         $select.attr('data-select', _this._selectId);
 
-                        var buttonText = 'Dropdown';
                         var options = [];
                         $select.find('option').each(function() {
 
@@ -90,27 +93,27 @@
                                 "label": $(this).text()
                             });
 
-                            if ($(this).prop("selected") === true) {
-                                buttonText = $(this).text();
+                            if (_this._config.toggleChange === true && $(this).prop("selected") === true) {
+                                _this._config.toggleText = $(this).text();
                             }
 
                         });
 
                         var items = '';
                         var $dropdown = $('<div class="' + _this._config.dropdownClass + '" />');
-                        var $button = $('<button class="' + _this._config.toggleButtonClass + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />');
-                        $button.html(buttonText + ' ' + _this._config.toggleButtonCaret);
+                        var $button = $('<button class="' + _this._config.toggleClass + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />');
+                        $button.html(_this._config.toggleText + ' ' + _this._config.toggleCaret);
                         $button.attr('id', _this._selectId);
                         $dropdown.append($button);
 
-                        var $options = $('<ul class="' + _this._config.dropdownMenuClass + '" />');
+                        var $options = $('<ul class="' + _this._config.listClass + '" />');
                         $.each(options, function(key, option) {
                             if (option.active === true)
-                                items += '<li class="' + _this._config.dropdownItemClass + ' active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.itemClass + ' active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else if (option.disabled === true)
-                                items += '<li class="' + _this._config.dropdownItemClass + ' disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.itemClass + ' disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else
-                                items += '<li class="' + _this._config.dropdownItemClass + '"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.itemClass + '"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                         });
                         $options.append($(items));
                         $options.attr('aria-labelledby', _this._selectId);
@@ -178,7 +181,11 @@
                                     event.stopPropagation();
                                 }
                             }
-                            $button.html(label  + ' ' + _this._config.toggleButtonCaret);
+
+                            if (_this._config.toggleChange === true && !_target.hasClass('disabled')) {
+                                $button.html(label + ' ' + _this._config.toggleCaret);
+                            }
+
                         });
                     } else {
                         console.warn('Element has not select!', $select);
