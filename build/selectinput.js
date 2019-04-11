@@ -42,10 +42,12 @@
 
         // Public options and methods
         var defaults = {
-            format: null, // string, default format of date/time
-            className: '.select-input', // string, class name of input group
-            input: '.select-input', // string, selector or jQuery object of input
-            debug: false, // boolean, flag if need debug in console log
+            dropdownClass: '.dropdown',
+            toggleButtonClass: '.btn .btn-default .dropdown-toggle',
+            dropdownMenuClass: '.dropdown-menu',
+            dropdownItemClass: '.dropdown-item',
+            toggleButtonCaret: '<span class="caret"></span>',
+            debug: false
         };
 
         var SelectInput = (function() {
@@ -56,7 +58,10 @@
                 _classCallCheck(_this, SelectInput);
 
                 // Prepare class name to remove dots (.) from selector
-                config.className = config.className.replace(/\./g, '');
+                config.dropdownClass = config.dropdownClass.replace(/\./g, '');
+                config.toggleButtonClass = config.toggleButtonClass.replace(/\./g, '');
+                config.dropdownMenuClass = config.dropdownMenuClass.replace(/\./g, '');
+                config.dropdownItemClass = config.dropdownItemClass.replace(/\./g, '');
 
                 // Merge default and custom options
                 _this._config = $.extend({}, defaults, config);
@@ -91,22 +96,21 @@
 
                         });
 
-                        var caret = '<span class="caret"></span>';
-                        var $dropdown = $('<div class="dropdown" />');
-                        var $button = $('<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />');
-                        $button.html(buttonText + ' ' + caret);
+                        var items = '';
+                        var $dropdown = $('<div class="' + _this._config.dropdownClass + '" />');
+                        var $button = $('<button class="' + _this._config.toggleButtonClass + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />');
+                        $button.html(buttonText + ' ' + _this._config.toggleButtonCaret);
                         $button.attr('id', _this._selectId);
                         $dropdown.append($button);
 
-                        var $options = $('<ul class="dropdown-menu" />');
-                        var items = '';
+                        var $options = $('<ul class="' + _this._config.dropdownMenuClass + '" />');
                         $.each(options, function(key, option) {
                             if (option.active === true)
-                                items += '<li class="active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.dropdownItemClass + ' active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else if (option.disabled === true)
-                                items += '<li class="disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.dropdownItemClass + ' disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else
-                                items += '<li><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                                items += '<li class="' + _this._config.dropdownItemClass + '"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                         });
                         $options.append($(items));
                         $options.attr('aria-labelledby', _this._selectId);
@@ -119,70 +123,67 @@
                         $options.find('li').on('click', function(event) {
                             event.preventDefault();
 
-                            var label = $(this).find('> a').text();
-                            var value = $(this).find('> a').data('value');
+                            var _target = $(this);
+                            var label = _target.find('> a').text();
+                            var value = _target.find('> a').data('value');
 
                             if(type === "select-multiple") {
                                 event.stopPropagation();
-                                if (!$(this).hasClass('disabled')) {
-                                    if ($(this).hasClass('active')) {
-                                        $(this).removeClass('active');
+                                if (!_target.hasClass('disabled')) {
+                                    if (_target.hasClass('active')) {
+
+                                        _target.removeClass('active');
                                         $select.find('option').removeAttr('selected');
                                         $select.find('option').each(function() {
 
-                                            if ($(this).attr('value') === value)
-                                                $(this).removeAttr('selected');
+                                            if (_target.attr('value') === value)
+                                                _target.removeAttr('selected');
 
-                                            if ($(this).text() === label)
-                                                $(this).removeAttr('selected');
+                                            if (_target.text() === label)
+                                                _target.removeAttr('selected');
 
                                         });
                                     } else {
-                                        $(this).addClass('active');
+
+                                        _target.addClass('active');
                                         $select.find('option').removeAttr('selected');
                                         $select.find('option').each(function() {
 
-                                            if ($(this).attr('value') === value)
-                                                $(this).attr('selected', 'selected');
+                                            if (_target.attr('value') === value)
+                                                _target.attr('selected', 'selected');
 
-                                            if ($(this).text() === label)
-                                                $(this).attr('selected', 'selected');
+                                            if (_target.text() === label)
+                                                _target.attr('selected', 'selected');
 
                                         });
                                     }
                                 }
                             } else {
-                                if (!$(this).hasClass('disabled')) {
+                                if (!_target.hasClass('disabled')) {
+
                                     $options.find('li').removeClass('active');
-                                    $(this).addClass('active');
+                                    _target.addClass('active');
+
                                     $select.find('option').removeAttr('selected');
                                     $select.find('option').each(function () {
 
-                                        if ($(this).attr('value') === value)
-                                            $(this).attr('selected', 'selected');
+                                        if (_target.attr('value') === value)
+                                            _target.attr('selected', 'selected');
 
-                                        if ($(this).text() === label)
-                                            $(this).attr('selected', 'selected');
+                                        if (_target.text() === label)
+                                            _target.attr('selected', 'selected');
 
                                     });
                                 } else {
                                     event.stopPropagation();
                                 }
                             }
-
-                            $button.html(label  + ' ' + caret);
-
-
+                            $button.html(label  + ' ' + _this._config.toggleButtonCaret);
                         });
-
                     } else {
                         console.warn('Element has not select!', $select);
                     }
                 });
-
-
-
-
             }
 
             _createClass(SelectInput, {
@@ -192,11 +193,6 @@
                         return _this._$element;
                     }
                 }
-
-
-
-
-
             }, {
                 Default: {
                     get: function() {
