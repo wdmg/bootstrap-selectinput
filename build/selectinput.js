@@ -74,7 +74,6 @@
                         $select.css('display', 'none').removeAttr('class');
                         $select.attr('data-select', _this._selectId);
 
-
                         var buttonText = 'Dropdown';
                         var options = [];
                         $select.find('option').each(function() {
@@ -82,6 +81,7 @@
                             options.push({
                                 "value": typeof $(this).attr('value') === "undefined" ? false : $(this).attr('value'),
                                 "active": $(this).prop("selected"),
+                                "disabled": $(this).prop("disabled"),
                                 "label": $(this).text()
                             });
 
@@ -103,6 +103,8 @@
                         $.each(options, function(key, option) {
                             if (option.active === true)
                                 items += '<li class="active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
+                            else if (option.disabled === true)
+                                items += '<li class="disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else
                                 items += '<li><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                         });
@@ -122,44 +124,50 @@
 
                             if(type === "select-multiple") {
                                 event.stopPropagation();
-                                if ($(this).hasClass('active')) {
-                                    $(this).removeClass('active');
+                                if (!$(this).hasClass('disabled')) {
+                                    if ($(this).hasClass('active')) {
+                                        $(this).removeClass('active');
+                                        $select.find('option').removeAttr('selected');
+                                        $select.find('option').each(function() {
+
+                                            if ($(this).attr('value') === value)
+                                                $(this).removeAttr('selected');
+
+                                            if ($(this).text() === label)
+                                                $(this).removeAttr('selected');
+
+                                        });
+                                    } else {
+                                        $(this).addClass('active');
+                                        $select.find('option').removeAttr('selected');
+                                        $select.find('option').each(function() {
+
+                                            if ($(this).attr('value') === value)
+                                                $(this).attr('selected', 'selected');
+
+                                            if ($(this).text() === label)
+                                                $(this).attr('selected', 'selected');
+
+                                        });
+                                    }
+                                }
+                            } else {
+                                if (!$(this).hasClass('disabled')) {
+                                    $options.find('li').removeClass('active');
+                                    $(this).addClass('active');
                                     $select.find('option').removeAttr('selected');
-                                    $select.find('option').each(function() {
+                                    $select.find('option').each(function () {
 
                                         if ($(this).attr('value') === value)
-                                            $(this).removeAttr('selected');
+                                            $(this).attr('selected', 'selected');
 
                                         if ($(this).text() === label)
-                                            $(this).removeAttr('selected');
+                                            $(this).attr('selected', 'selected');
 
                                     });
                                 } else {
-                                    $(this).addClass('active');
-                                    $select.find('option').removeAttr('selected');
-                                    $select.find('option').each(function() {
-
-                                        if ($(this).attr('value') === value)
-                                            $(this).attr('selected', 'selected');
-
-                                        if ($(this).text() === label)
-                                            $(this).attr('selected', 'selected');
-
-                                    });
+                                    event.stopPropagation();
                                 }
-                            } else {
-                                $options.find('li').removeClass('active');
-                                $(this).addClass('active');
-                                $select.find('option').removeAttr('selected');
-                                $select.find('option').each(function() {
-
-                                    if ($(this).attr('value') === value)
-                                        $(this).attr('selected', 'selected');
-
-                                    if ($(this).text() === label)
-                                        $(this).attr('selected', 'selected');
-
-                                });
                             }
 
                             $button.html(label  + ' ' + caret);
