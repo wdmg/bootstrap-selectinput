@@ -2,7 +2,7 @@
  * Select to dropdown list for Bootstrap 3
  *
  * @category        jQuery Plugin
- * @version         1.0.1
+ * @version         1.0.2
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/bootstrap-selectinput
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -169,14 +169,15 @@
                                     if (_target.hasClass('active')) {
 
                                         _target.removeClass('active');
+
                                         $select.find('option').removeAttr('selected');
                                         $select.find('option').each(function() {
 
-                                            if (_target.attr('value') === value)
-                                                _target.removeAttr('selected');
+                                            if ($(this).attr('value') === value)
+                                                $(this).removeAttr('selected');
 
-                                            if (_target.text() === label)
-                                                _target.removeAttr('selected');
+                                            if ($(this).text() === label)
+                                                $(this).removeAttr('selected');
 
                                         });
                                     } else {
@@ -185,14 +186,15 @@
                                         $select.find('option').removeAttr('selected');
                                         $select.find('option').each(function() {
 
-                                            if (_target.attr('value') === value)
-                                                _target.attr('selected', 'selected');
+                                            if ($(this).attr('value') === value)
+                                                $(this).attr('selected', 'selected');
 
-                                            if (_target.text() === label)
-                                                _target.attr('selected', 'selected');
+                                            if ($(this).text() === label)
+                                                $(this).attr('selected', 'selected');
 
                                         });
                                     }
+                                    $select.trigger('change');
                                 }
                             } else {
                                 if (!_target.hasClass('disabled')) {
@@ -203,13 +205,14 @@
                                     $select.find('option').removeAttr('selected');
                                     $select.find('option').each(function () {
 
-                                        if (_target.attr('value') === value)
-                                            _target.attr('selected', 'selected');
+                                        if ($(this).attr('value') === value)
+                                            $(this).attr('selected', 'selected');
 
-                                        if (_target.text() === label)
-                                            _target.attr('selected', 'selected');
+                                        if ($(this).text() === label)
+                                            $(this).attr('selected', 'selected');
 
                                     });
+                                    $select.trigger('change');
                                 } else {
                                     event.stopPropagation();
                                 }

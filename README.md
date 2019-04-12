@@ -68,4 +68,5 @@ For example use the input-group:
 
 
 # Status and version
+* v.1.0.2 - Bugfix and added trigger change for select
 * v.1.0.1 - Plugin in progress development
