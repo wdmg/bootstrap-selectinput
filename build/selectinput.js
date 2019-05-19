@@ -2,7 +2,7 @@
  * Select to dropdown list for Bootstrap 3
  *
  * @category        jQuery Plugin
- * @version         1.0.2
+ * @version         1.1.0
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/bootstrap-selectinput
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -132,6 +132,23 @@
                         if(!$select.next().is('.dropdown')) {
                             $select.after($dropdown);
                         }
+
+                        // If main select on change
+                        $select.on('change', function() {
+                            if(_this._config.debug)
+                                console.log('Original select has shange value to: `' + this.value + '`', _this);
+
+                            var $target = $options.find('a[data-value="'+this.value+'"]');
+                            if($target) {
+                                $options.find('li').removeClass('active');
+                                $target.parent('li').addClass('active');
+                                var toggleText = $target.text();
+
+                                if(toggleText)
+                                    $button.html(toggleText + ' ' + _this._config.toggleCaret);
+
+                            }
+                        });
 
                         // Call a public methods
                         $dropdown.on('show.bs.dropdown', function(event) {
