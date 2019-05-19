@@ -110,11 +110,15 @@
                         var $button = $('<button class="' + _this._config.toggleClass + '" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />');
                         $button.html(_this._config.toggleText + ' ' + _this._config.toggleCaret);
                         $button.attr('id', _this._selectId);
+
+                        if($select.prop('disabled'))
+                            $button.prop('disabled', "disabled");
+
                         $dropdown.append($button);
 
                         var $options = $('<ul class="' + _this._config.listClass + '" />');
                         $.each(options, function(key, option) {
-                            if (option.active === true)
+                            if (option.active === true || option.selected === true)
                                 items += '<li class="' + _this._config.itemClass + ' active"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
                             else if (option.disabled === true)
                                 items += '<li class="' + _this._config.itemClass + ' disabled"><a href="#" data-value="' + option.value + '">' + option.label + '</a></li>';
