@@ -68,4 +68,5 @@ For example use the input-group:
 
 
 # Status and version
+* v.1.1.1 - OnChange bugfix
 * v.1.1.0 - Added on change value of main select

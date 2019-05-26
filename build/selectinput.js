@@ -2,7 +2,7 @@
  * Select to dropdown list for Bootstrap 3
  *
  * @category        jQuery Plugin
- * @version         1.1.0
+ * @version         1.1.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/bootstrap-selectinput
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -136,17 +136,19 @@
                         // If main select on change
                         $select.on('change', function() {
                             if(_this._config.debug)
-                                console.log('Original select has shange value to: `' + this.value + '`', _this);
+                                console.log('Original select has change value to: `' + this.value + '`', _this);
 
-                            var $target = $options.find('a[data-value="'+this.value+'"]');
-                            if($target) {
-                                $options.find('li').removeClass('active');
-                                $target.parent('li').addClass('active');
-                                var toggleText = $target.text();
+                            if(this.value) {
+                                var $target = $options.find('a[data-value="' + this.value + '"]');
+                                if ($target) {
+                                    $options.find('li').removeClass('active');
+                                    $target.parent('li').addClass('active');
+                                    var toggleText = $target.text();
 
-                                if(toggleText)
-                                    $button.html(toggleText + ' ' + _this._config.toggleCaret);
+                                    if (toggleText)
+                                        $button.html(toggleText + ' ' + _this._config.toggleCaret);
 
+                                }
                             }
                         });
 
@@ -192,7 +194,7 @@
                                         _target.removeClass('active');
 
                                         $select.find('option').removeAttr('selected');
-                                        $select.find('option').each(function() {
+                                        $select.find('option').val(function() {
 
                                             if ($(this).attr('value') === value)
                                                 $(this).removeAttr('selected');
@@ -215,25 +217,13 @@
 
                                         });
                                     }
-                                    $select.trigger('change');
                                 }
                             } else {
                                 if (!_target.hasClass('disabled')) {
 
                                     $options.find('li').removeClass('active');
                                     _target.addClass('active');
-
-                                    $select.find('option').removeAttr('selected');
-                                    $select.find('option').each(function () {
-
-                                        if ($(this).attr('value') === value)
-                                            $(this).attr('selected', 'selected');
-
-                                        if ($(this).text() === label)
-                                            $(this).attr('selected', 'selected');
-
-                                    });
-                                    $select.trigger('change');
+                                    $select.val(value).change();
                                 } else {
                                     event.stopPropagation();
                                 }
