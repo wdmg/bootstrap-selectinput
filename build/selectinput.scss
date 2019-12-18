@@ -1,6 +1,39 @@
-.dropdown {
-  &.open {
+.selectinput {
+  &.btn-group {
+    input {
+      display: inline-block;
+      margin-bottom: 0;
+      //white-space: nowrap;
+      border: 1px solid #ccc;
+      float: left;
+      width: auto;
+      margin-left: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    input + .btn,
+    .form-control + .btn {
+      margin-left: -1px;
+    }
+    &.open {
+      .dropdown-menu {
+        margin-top: -1px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+      }
+      input {
+        border-bottom-left-radius: 0;
+      }
+      input + .btn,
+      .form-control + .btn {
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+  &.dropdown {
+    &.open {
 
+    }
   }
   .dropdown-toggle {
     & > span {
@@ -8,8 +41,11 @@
     }
   }
   .dropdown-menu {
+    left: 0;
+    right: 0;
     & > .dropdown-item {
 
     }
   }
 }
+

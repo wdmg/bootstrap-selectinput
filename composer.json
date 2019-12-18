@@ -5,6 +5,7 @@
     "twitter-bootstrap",
     "bootstrap",
     "select",
+    "autocomplete",
     "dropdown"
   ],
   "homepage": "https://github.com/wdmg/bootstrap-selectinput",
@@ -22,5 +23,5 @@
     "issues": "https://github.com/wdmg/bootstrap-selectinput/issues"
   },
   "license": "MIT",
-  "version": "1.1.1"
+  "version": "1.2.0"
 }

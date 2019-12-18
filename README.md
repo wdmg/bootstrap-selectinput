@@ -10,7 +10,7 @@ Select to dropdown list for Bootstrap 3
 
 # Usage example
 
-For example use the input-group:
+For example use the form-group:
 
     <div class="form-group">
         <label class="control-label" for="selectinput1">Select:</label>
@@ -43,6 +43,7 @@ For example use the input-group:
                 dropdownClass: '.dropdown .some-dropdown',
                 toggleText: 'Select option',
                 toggleCaret: '<span class="fa fa-chevron-down"></span>',
+                autocomplete: 'http://example.com/api/get/options',
                 ...
             });
         });
@@ -59,14 +60,24 @@ For example use the input-group:
 | toggleText      | string   | 'Dropdown'       | Default text of the toggle button. |
 | toggleCaret     | html     | `<span class="caret"></span>` | Default caret of the toggle button. |
 | toggleChange    | boolean  | `true`           | Flag if need to change the toggle button text. |
-| onChange        | function | `onChange()`    | The function that is called when select option change. |
-| onShow          | function | `onShow()`      | The function that is called when dropdown is ready to be displayed. |
-| onShown         | function | `onShown()`     | The function that is called when dropdown is displayed. |
-| onHide          | function | `onHide()`      | The function that is called when dropdown to prepare for hiding. |
-| onHidden        | function | `onHidden()`    | Flag if need debug in console log. |
+| autocomplete    | boolean / string  | `false` | Autocomplete URL. |
+| minInput        | integer  | `2`              | Min input lenght. |
+| templates       | object   | `inputField`, `autocompleteList`, `autocompleteItem` | Autocomplete component templates. |
+| onChange        | function | `onChange()`     | The function that is called when select option change. |
+| onShow          | function | `onShow()`       | The function that is called when dropdown is ready to be displayed. |
+| onShown         | function | `onShown()`      | The function that is called when dropdown is displayed. |
+| onHide          | function | `onHide()`       | The function that is called when dropdown to prepare for hiding. |
+| onHidden        | function | `onHidden()`     | Flag if need debug in console log. |
+| onAutocompleteSuccess | function | `onAutocompleteSuccess()` | The function is called when autocomplete successfully called an ajax request. |
+| onAutocompleteError   | function | `onAutocompleteError()`   | The function is called when autocomplete caused an ajax error. |
+| onAutocompleteShow    | function | `onAutocompleteShow()`    | The function that is called when autocomplete is ready to be displayed. |
+| onAutocompleteShown   | function | `onAutocompleteShown()`   | The function that is called when autocomplete is displayed. |
+| onAutocompleteHide    | function | `onAutocompleteHide()`    | The function that is called when autocomplete to prepare for hiding. |
+| onAutocompleteHidden  | function | `onAutocompleteHidden()`  | The function that is called when autocomplete is hidden. |
 | debug           | boolean  | `false`          | The function that is called when dropdown is hidden. |
 
 
 # Status and version
+* v.1.2.0 - Refactoring, added autocomplete
 * v.1.1.1 - OnChange bugfix
 * v.1.1.0 - Added on change value of main select

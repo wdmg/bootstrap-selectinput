@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                     'build/selectinput.js'
                 ],
                 dest: 'src/js/selectinput.js'
-            },
+            }
         },
         uglify: {
             selectinput: {
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                 files: {
                     'src/js/selectinput.min.js': ['build/selectinput.js']
                 }
-            },
+            }
         },
         sass: {
             style: {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
                 tasks: ['concat', 'uglify'],
                 options: {
                     spawn: false
-                },
+                }
             },
             styles: {
                 files: ['build/selectinput.scss'],

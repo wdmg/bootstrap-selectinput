@@ -22,24 +22,57 @@
                         <div class="form-group">
                             <label class="control-label" for="selectinput1">Select:</label>
                             <select id="selectinput1" class="form-control">
-                                <option value="1">Select option one</option>
-                                <option value="2" selected>Select option two</option>
-                                <option value="3">Select option three</option>
-                                <option value="4" disabled>Select option one</option>
-                                <option value="5" selected>Select option two</option>
-                                <option value="6">Select option three</option>
+                                <option value="1">Canada</option>
+                                <option value="2">Poland</option>
+                                <option value="3">Latvia</option>
+                                <option value="4" disabled>Bulgaria</option>
+                                <option value="5">Russia</option>
+                                <option value="6">Ukraine</option>
+                                <option value="7">Germany</option>
+                                <option value="8">United Kingdom</option>
+                                <option value="9" selected>Sweden</option>
+                                <option value="10" disabled>Australia</option>
+                                <option value="11">United States</option>
+                                <option value="12">Norway</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="selectinput2">Multiple select:</label>
                             <select id="selectinput2" multiple class="form-control">
-                                <option value="1">Select option one</option>
-                                <option value="2" selected>Select option two</option>
-                                <option value="3">Select option three</option>
-                                <option value="4" disabled>Select option one</option>
-                                <option value="5" selected>Select option two</option>
-                                <option value="6">Select option three</option>
+                                <option value="1">Canada</option>
+                                <option value="2">Poland</option>
+                                <option value="3" selected>Latvia</option>
+                                <option value="4" disabled>Bulgaria</option>
+                                <option value="5">Russia</option>
+                                <option value="6">Ukraine</option>
+                                <option value="7" selected>Germany</option>
+                                <option value="8">United Kingdom</option>
+                                <option value="9">Sweden</option>
+                                <option value="10" disabled>Australia</option>
+                                <option value="11">United States</option>
+                                <option value="12">Norway</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="selectinput3">Select with autocomplete:</label>
+                            <select id="selectinput3" class="form-control" placeholder="Type your country...">
+                                <option value="1">Canada</option>
+                                <option value="2">Poland</option>
+                                <option value="3">Latvia</option>
+                                <option value="4" disabled>Bulgaria</option>
+                                <option value="5" disabled>Russia</option>
+                                <option value="6" selected>Ukraine</option>
+                                <option value="7">Germany</option>
+                                <option value="8">United Kingdom</option>
+                                <option value="9" disabled>Sweden</option>
+                                <option value="10">Australia</option>
+                                <option value="11">United States</option>
+                                <option value="12">Norway</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="selectinput4">Input with autocomplete:</label>
+                            <input type="text" id="selectinput4" class="form-control" placeholder="Type your country...">
                         </div>
                     </div>
                 </div>
@@ -51,12 +84,35 @@
         <script src="../src/js/selectinput.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $('select').selectinput({
-                    dropdownClass: '.dropdown .some-dropdown',
+
+
+                $('select, input').each(function() {
+                    $(this).on('change', function() {
+                        console.log('SelectInput `' + $(this).data('select') +'` [' + $(this).attr('id') +']: '+ $(this).val());
+                    });
+                });
+
+                $('#selectinput1').selectinput({
                     toggleText: 'Select option',
                     toggleCaret: '<span class="caret"></span>'
-
                 });
+                $('#selectinput2').selectinput({
+                    toggleText: 'Select option',
+                    toggleCaret: '<span class="caret"></span>'
+                });
+                $('#selectinput3').selectinput({
+                    toggleText: 'Type option',
+                    toggleCaret: '<span class="caret"></span>',
+                    autocomplete: './data.json',
+                    debug: true
+                });
+                $('#selectinput4').selectinput({
+                    toggleText: 'Select option',
+                    toggleCaret: '<span class="caret"></span>',
+                    autocomplete: './data.json'
+                });
+
+
             });
         </script>
     </body>
