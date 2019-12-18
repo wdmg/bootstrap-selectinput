@@ -85,33 +85,27 @@
         <script type="text/javascript">
             $(document).ready(function () {
 
-
-                $('select, input').each(function() {
-                    $(this).on('change', function() {
-                        console.log('SelectInput `' + $(this).data('select') +'` [' + $(this).attr('id') +']: '+ $(this).val());
-                    });
-                });
-
                 $('#selectinput1').selectinput({
                     toggleText: 'Select option',
                     toggleCaret: '<span class="caret"></span>'
                 });
+                
                 $('#selectinput2').selectinput({
                     toggleText: 'Select option',
                     toggleCaret: '<span class="caret"></span>'
                 });
+
                 $('#selectinput3').selectinput({
                     toggleText: 'Type option',
                     toggleCaret: '<span class="caret"></span>',
-                    autocomplete: './data.json',
-                    debug: true
+                    autocomplete: './data.json'
                 });
+
                 $('#selectinput4').selectinput({
                     toggleText: 'Select option',
                     toggleCaret: '<span class="caret"></span>',
                     autocomplete: './data.json'
                 });
-
 
             });
         </script>
