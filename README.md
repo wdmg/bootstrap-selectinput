@@ -78,6 +78,7 @@ For example use the form-group:
 
 
 # Status and version
+* v.1.2.1 - Fixed value from json for autocomplete
 * v.1.2.0 - Refactoring, added autocomplete
 * v.1.1.1 - OnChange bugfix
 * v.1.1.0 - Added on change value of main select

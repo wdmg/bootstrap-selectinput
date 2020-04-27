@@ -2,7 +2,7 @@
  * Select to dropdown list for Bootstrap 3
  *
  * @category        jQuery Plugin
- * @version         1.2.0
+ * @version         1.2.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/bootstrap-selectinput
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -354,11 +354,11 @@
                             var name = $input.attr('name');
                             var placeholder = $input.attr('placeholder');
 
-                            if (id)
-                                _this.$input.prop('id', id);
+                            /*if (id)
+                                _this.$input.prop('id', id + '-autocomplete');*/
 
-                            if (name)
-                                _this.$input.prop('name', name);
+                            /*if (name)
+                                _this.$input.prop('name', name + '-autocomplete');*/
 
                             if (_this._widgetId)
                                 _this.$input.data('select', _this._widgetId);
@@ -479,7 +479,8 @@
                                                 if (item.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
                                                     items.push({
                                                         label: "<b>" + item.substr(0, value.length) + "</b>" + item.substr(value.length),
-                                                        value: item
+                                                        value: index
+                                                        //value: value
                                                     });
                                                 }
 
